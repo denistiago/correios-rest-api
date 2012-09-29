@@ -11,13 +11,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.denistiago.model.Endereco;
 
 @Service
 public class CorreioService {
-
+	
+	@Cacheable("enderecos")
 	public List<Endereco> findByAddress(String rua) {
 
 		List<Endereco> enderecos = new ArrayList<Endereco>();
