@@ -55,7 +55,7 @@
 				</bean>
 				<bean
 					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
-					<property name="name" value="enderecos" />
+					<property name="name" value="address" />
 				</bean>
 			</set>
 		</property>

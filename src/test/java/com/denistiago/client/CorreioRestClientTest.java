@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.denistiago.model.Address;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
-
-import com.denistiago.model.Endereco;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,8 +29,8 @@ public class CorreioRestClientTest {
 	public void testFindByAddress() {
 		
 		Map<String,String> parameters = new HashMap<String, String>();
-		parameters.put("endereco", "rua irene garcia");
-		List<Endereco> enderecos = (ArrayList<Endereco>) restTemplate.getForObject("http://localhost:8080/correios-rest/rest/endereco/findBy?endereco={endereco}", 
+		parameters.put("address", "rua irene garcia");
+		List<Address> enderecos = (ArrayList<Address>) restTemplate.getForObject("http://localhost:8080/rest/address/findByAddress?address={address}",
 																				List.class,
 																				parameters);
 		Assert.assertNotNull(enderecos);

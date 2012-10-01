@@ -19,7 +19,7 @@
 	<bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
 		<property name="aliases">
 	        <props>
-	            <prop key="endereco">com.denistiago.model.Endereco</prop>
+	            <prop key="address">com.denistiago.model.Address</prop>
 	        </props>
 	    </property>
 	</bean>
