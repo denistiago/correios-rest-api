@@ -9,7 +9,18 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
+      <facet type="google-app-engine" name="Google App Engine">
+        <configuration>
+          <password>dfcedfcfdfc4dfc3dfd9dfdedfc3dfcbdfcddfc5df9adf9edf9bdf9adf9adf9f</password>
+          <sdk-home-path>$USER_HOME$/dev/apps/servers/appengine-java-sdk-1.7.2.1</sdk-home-path>
+          <email>denis.analistajava@gmail.com</email>
+        </configuration>
+      </facet>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">

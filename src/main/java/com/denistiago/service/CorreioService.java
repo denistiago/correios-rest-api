@@ -1,16 +1,12 @@
 package com.denistiago.service;
 
-import java.io.IOException;
 import java.util.*;
 
-import com.denistiago.fetcher.AddressDataFactory;
+import com.denistiago.fetcher.AddressDataFetcherFactory;
 import com.denistiago.fetcher.AddressDataFetcher;
+import com.denistiago.fetcher.AddressSearchType;
 import com.denistiago.fetcher.exception.AddressDataFetcherException;
 import com.denistiago.model.Address;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +14,19 @@ import org.springframework.stereotype.Service;
 public class CorreioService {
 	
 	@Cacheable("address")
-	public List<Address> findByAddress(String street) {
-        AddressDataFetcher fetcher = AddressDataFactory.getInstance(AddressDataFactory.AddressDataEnum.CORREIO_MOBILE);
+	public List<Address> findByAddress(String addressDescription, String engine) {
+
+        AddressDataFetcher fetcher = AddressDataFetcherFactory.getInstance(AddressSearchType.toEnum(engine));
         try {
-            return fetcher.fetchAddressByAddressDescription(street);
+            return fetcher.fetchAddressByAddressDescription(addressDescription);
         } catch (AddressDataFetcherException e) {
             return Collections.emptyList();
         }
     }
 
     @Cacheable("address")
-    public List<Address> findByPostalCode(String postalCode) {
-        AddressDataFetcher fetcher = AddressDataFactory.getInstance(AddressDataFactory.AddressDataEnum.CORREIO_MOBILE);
+    public List<Address> findByPostalCode(String postalCode, String engine) {
+        AddressDataFetcher fetcher = AddressDataFetcherFactory.getInstance(AddressSearchType.toEnum(engine));
         try {
             return fetcher.fetchAddressByPostalCode(postalCode);
         } catch (AddressDataFetcherException e) {

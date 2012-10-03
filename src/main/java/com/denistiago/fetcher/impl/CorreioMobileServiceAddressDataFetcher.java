@@ -11,13 +11,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: dsilva
- * Date: 01/10/12
- * Time: 10:06
- * To change this template use File | Settings | File Templates.
- */
 public class CorreioMobileServiceAddressDataFetcher implements AddressDataFetcher {
 
     private final String PARAM_CEP_OR_ADDRESS = "cepEntrada";
@@ -35,7 +28,7 @@ public class CorreioMobileServiceAddressDataFetcher implements AddressDataFetche
         return fetchAndParseData(description);
     }
     
-    public List<Address> fetchAndParseData(String descriptionOrPostalCode) throws AddressDataFetcherException {
+    private List<Address> fetchAndParseData(String descriptionOrPostalCode) throws AddressDataFetcherException {
         return parse(fetch(descriptionOrPostalCode));
     }
 
@@ -49,6 +42,7 @@ public class CorreioMobileServiceAddressDataFetcher implements AddressDataFetche
         try {
             doc = Jsoup
                     .connect(MOBILE_CORREIO_SERVICE)
+                    .timeout(10000)
                     .data(parameters)
                     .post();
 
