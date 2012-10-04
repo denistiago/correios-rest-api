@@ -1,37 +1,34 @@
 package com.denistiago.service;
 
-import java.util.*;
+import java.util.List;
 
-import com.denistiago.fetcher.AddressDataFetcherFactory;
-import com.denistiago.fetcher.AddressDataFetcher;
-import com.denistiago.fetcher.AddressSearchType;
-import com.denistiago.fetcher.exception.AddressDataFetcherException;
-import com.denistiago.model.Address;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.denistiago.fetcher.AddressDataFetcher;
+import com.denistiago.fetcher.AddressDataFetcherFactory;
+import com.denistiago.fetcher.AddressSearchType;
+import com.denistiago.model.Address;
 
 @Service
 public class CorreioService {
 	
-	@Cacheable("address")
-	public List<Address> findByAddress(String addressDescription, String engine) {
-
-        AddressDataFetcher fetcher = AddressDataFetcherFactory.getInstance(AddressSearchType.toEnum(engine));
-        try {
-            return fetcher.fetchAddressByAddressDescription(addressDescription);
-        } catch (AddressDataFetcherException e) {
-            return Collections.emptyList();
-        }
+	@Autowired
+	private ResponseBuilder addressResponseBuilder;
+	
+	public Response<List<Address>> findByAddress(String addressDescription, String engine) {
+		AddressDataFetcher fetcher = AddressDataFetcherFactory.getInstance(AddressSearchType.toEnum(engine));
+        return buildResponse(fetcher.fetchAddressByAddressDescription(addressDescription));
     }
 
-    @Cacheable("address")
-    public List<Address> findByPostalCode(String postalCode, String engine) {
+    public Response<List<Address>> findByPostalCode(String postalCode, String engine) {
         AddressDataFetcher fetcher = AddressDataFetcherFactory.getInstance(AddressSearchType.toEnum(engine));
-        try {
-            return fetcher.fetchAddressByPostalCode(postalCode);
-        } catch (AddressDataFetcherException e) {
-            return Collections.emptyList();
-        }
+        return buildResponse(fetcher.fetchAddressByPostalCode(postalCode));       
     }
+	
+	private Response<List<Address>> buildResponse(
+			List<Address> addressList) {
+		return addressResponseBuilder.buildResponse(addressList);
+	}
 	
 }

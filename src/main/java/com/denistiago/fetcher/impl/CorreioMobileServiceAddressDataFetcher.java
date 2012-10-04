@@ -47,7 +47,7 @@ public class CorreioMobileServiceAddressDataFetcher implements AddressDataFetche
                     .post();
 
         } catch (IOException e) {
-            throw new AddressDataFetcherException("Can´t connect to mobile service endpoint",e);
+            throw new AddressDataFetcherException("Can not connect to mobile service endpoint",e);
         }
 
         return doc;

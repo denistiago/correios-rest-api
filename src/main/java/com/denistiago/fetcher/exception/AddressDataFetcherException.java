@@ -1,8 +1,14 @@
 package com.denistiago.fetcher.exception;
 
-public class AddressDataFetcherException extends Exception {
+public class AddressDataFetcherException extends RuntimeException {
 
-    public AddressDataFetcherException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5203535539150489104L;
+
+
+	public AddressDataFetcherException(String message) {
         super(message);
     }
 
